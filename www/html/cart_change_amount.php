@@ -1,5 +1,5 @@
 <?php
-require_once '../conf/const.php';
+require_once '../conf/const.php'; //定数関数ファイルの読み込み
 require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
