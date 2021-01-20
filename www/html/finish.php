@@ -21,6 +21,9 @@ if(purchase_carts($db, $carts) === false){
   redirect_to(CART_URL);
 } 
 
+//XSS対策
+$carts = entity_assoc_array($carts);
+
 $total_price = sum_carts($carts);
 
 include_once '../view/finish_view.php';
