@@ -1,9 +1,9 @@
 <?php
-require_once '../conf/const.php';
-require_once MODEL_PATH . 'functions.php';
-require_once MODEL_PATH . 'user.php';
-require_once MODEL_PATH . 'item.php';
-require_once MODEL_PATH . 'cart.php';
+require_once '../conf/const.php'; //定数関数ファイルの読み込み
+require_once MODEL_PATH . 'functions.php'; //共通関数ファイルの読み込み
+require_once MODEL_PATH . 'user.php'; //ユーザーデータ用関数ファイルの読み込み
+require_once MODEL_PATH . 'item.php'; //商品用関数ファイルの読みこみ
+require_once MODEL_PATH . 'cart.php'; //カート用関数ファイルの読み込み
 
 session_start();
 
