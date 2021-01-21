@@ -16,10 +16,10 @@ function get_item($db, $item_id){
     FROM
       items
     WHERE
-      item_id = {$item_id}
+      item_id = ?
   ";
 
-  return fetch_query($db, $sql);
+  return fetch_query($db, $sql, array($item_id));
 }
 //商品一覧（複数取得行）取得のsql文
 function get_items($db, $is_open = false){
@@ -66,14 +66,14 @@ function regist_item($db, $name, $price, $stock, $status, $image){
 function regist_item_transaction($db, $name, $price, $stock, $status, $image, $filename){
   $db->beginTransaction();
   //商品の新規追加と画像アップロードが成功はtrue、失敗はfalse
-  if(insert_item($db, $name, $price, $stock, $filename, $status) 
+  if(insert_item($db, $name, $price, $stock, $filename, $status)
     && save_image($image, $filename)){
     $db->commit();
     return true;
   }
   $db->rollback();
   return false;
-  
+
 }
 //商品の新規追加sql文
 function insert_item($db, $name, $price, $stock, $filename, $status){
@@ -87,10 +87,9 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
         image,
         status
       )
-    VALUES('{$name}', {$price}, {$stock}, '{$filename}', {$status_value});
+    VALUES(?, ?, ?, ?, ?);
   ";
-
-  return execute_query($db, $sql);
+  return execute_query($db, $sql, array($name, $price, $stock, $filename, $status_value));
 }
 //該当商品のステータスを更新するsql文
 function update_item_status($db, $item_id, $status){
@@ -98,13 +97,13 @@ function update_item_status($db, $item_id, $status){
     UPDATE
       items
     SET
-      status = {$status}
+      status = ?
     WHERE
-      item_id = {$item_id}
+      item_id = ?
     LIMIT 1
   ";
   //データを更新して、真偽値を取得
-  return execute_query($db, $sql);
+  return execute_query($db, $sql, array($status, $item_id));
 }
 //該当商品の在庫数を更新するsql文
 function update_item_stock($db, $item_id, $stock){
@@ -112,13 +111,13 @@ function update_item_stock($db, $item_id, $stock){
     UPDATE
       items
     SET
-      stock = {$stock}
+      stock = ?
     WHERE
-      item_id = {$item_id}
+      item_id = ?
     LIMIT 1
   ";
   //データを更新して、真偽値を取得
-  return execute_query($db, $sql);
+  return execute_query($db, $sql, array($stock, $item_id));
 }
 //該当商品をするまでのステップ
 function destroy_item($db, $item_id){
@@ -144,11 +143,11 @@ function delete_item($db, $item_id){
     DELETE FROM
       items
     WHERE
-      item_id = {$item_id}
+      item_id = ?
     LIMIT 1
   ";
   //データを削除して、真偽値を取得
-  return execute_query($db, $sql);
+  return execute_query($db, $sql, array($item_id));
 }
 
 

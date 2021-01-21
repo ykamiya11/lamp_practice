@@ -50,3 +50,6 @@ define('PERMITTED_IMAGE_TYPES', array(
   IMAGETYPE_JPEG => 'jpg',
   IMAGETYPE_PNG => 'png',
 ));
+
+/* フレーム内のページ表示を全ドメインで禁止する（トークンの盗難防止） */
+header('X-Frame-Options: DENY');

@@ -29,6 +29,7 @@ if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
 
+
 //商品一覧を取得して、変数へ代入
 $items = get_all_items($db);
 
