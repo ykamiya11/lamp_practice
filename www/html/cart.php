@@ -11,6 +11,9 @@ require_once MODEL_PATH . 'cart.php'; //カート用関数ファイルの読み�
 //セッション開始、再開
 session_start();
 
+//トークン生成
+$token = get_csrf_token();
+
 //ログイン可否判断
 if(is_logined() === false){
   //ログインしていなかった場合、login.php
@@ -24,6 +27,10 @@ $db = get_db_connect();
 $user = get_login_user($db);
 //ログインユーザーのカート情報を取得
 $carts = get_user_carts($db, $user['user_id']);
+
+//XSS対策
+$carts = entity_assoc_array($carts);
+
 //カート内の商品合計額を割り出して、変数へ代入
 $total_price = sum_carts($carts);
 

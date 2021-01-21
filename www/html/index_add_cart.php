@@ -6,6 +6,8 @@ require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
 
 session_start();
+//トークンの照合
+if(is_valid_csrf_token(get_post('csrf_token'))){
 
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
@@ -23,4 +25,10 @@ if(add_cart($db,$user['user_id'], $item_id)){
   set_error('カートの更新に失敗しました。');
 }
 
+redirect_to(HOME_URL);
+}
+
+//メッセージを設定
+set_error('不正なアクセスです。');
+//ユーザーのホームページへ遷移
 redirect_to(HOME_URL);

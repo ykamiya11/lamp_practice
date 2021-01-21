@@ -6,6 +6,9 @@ require_once MODEL_PATH . 'item.php';
 
 session_start();
 
+//トークン生成
+$token = get_csrf_token();
+
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
 }
@@ -14,5 +17,8 @@ $db = get_db_connect();
 $user = get_login_user($db);
 
 $items = get_open_items($db);
+
+//XSS対策
+$items = entity_assoc_array($items);
 
 include_once VIEW_PATH . 'index_view.php';

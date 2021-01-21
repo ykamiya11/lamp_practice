@@ -11,6 +11,9 @@ require_once MODEL_PATH . 'item.php'; //商品用関数ファイルの読みこ�
 //新しいセッションを開始、あるいは既存のセッションを開始（7.1.0からsession開始、falseを返すようになった）
 session_start();
 
+//トークン生成
+$token = get_csrf_token();
+
 //ログイン可否判断
 if(is_logined() === false){
   //ログインしていなかった場合、login.php
@@ -29,7 +32,12 @@ if(is_admin($user) === false){
   redirect_to(LOGIN_URL);
 }
 
+
 //商品一覧を取得して、変数へ代入
 $items = get_all_items($db);
+
+//XSS対策
+$items = entity_assoc_array($items);
+
 //管理者用ページへ遷移
 include_once VIEW_PATH . '/admin_view.php';
