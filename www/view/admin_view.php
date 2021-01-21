@@ -45,6 +45,8 @@
       </div>
       
       <input type="submit" value="商品追加" class="btn btn-primary">
+      <!-- トークン -->
+      <input type="hidden" name="csrf_token" value="<?php print $token ?>">
     </form>
 
 
@@ -74,6 +76,8 @@
                 </div>
                 <input type="submit" value="変更" class="btn btn-secondary">
                 <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                <!-- トークン -->
+                <input type="hidden" name="csrf_token" value="<?php print $token ?>">
               </form>
             </td>
             <td>
@@ -87,11 +91,15 @@
                   <input type="hidden" name="changes_to" value="open">
                 <?php } ?>
                 <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                <!-- トークン -->
+                <input type="hidden" name="csrf_token" value="<?php print $token ?>">
               </form>
 
               <form method="post" action="admin_delete_item.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
                 <input type="hidden" name="item_id" value="<?php print($item['item_id']); ?>">
+                <!-- トークン -->
+                <input type="hidden" name="csrf_token" value="<?php print $token ?>">
               </form>
 
             </td>
@@ -101,7 +109,7 @@
       </table>
     <?php } else { ?>
       <p>商品はありません。</p>
-    <?php } ?> 
+    <?php } ?>
   </div>
   <script>
     $('.delete').on('click', () => confirm('本当に削除しますか？'))

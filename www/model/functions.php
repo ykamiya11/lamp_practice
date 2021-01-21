@@ -135,6 +135,51 @@ function is_valid_upload_image($image){
   return true;
 }
 
-function h($str){
-  return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
+// function h($str){
+//   return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
+// }
+
+/**
+* 特殊文字をHTMLエンティティに変換する（整数の場合は変換せず返す）
+* @param str  $str 変換前文字
+* @return str 変換後文字
+*/
+function entity_str($str) {
+  if(is_numeric($str) === false){
+    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+  }else{
+    return $str;
+  }
+}
+/**
+* 特殊文字をHTMLエンティティに変換する(2次元配列の値)
+* @param array  $assoc_array 変換前配列
+* @return array 変換後配列
+*/
+function entity_assoc_array($assoc_array) {
+  foreach ($assoc_array as $key => $value) {
+    foreach ($value as $keys => $values) {
+      // 特殊文字をHTMLエンティティに変換
+      $assoc_array[$key][$keys] = entity_str($values);
+    }
+  }
+  return $assoc_array;
+}
+
+// トークンの生成
+function get_csrf_token(){
+  // get_random_string()はユーザー定義関数。
+  $token = get_random_string(30);
+  // set_session()はユーザー定義関数。
+  set_session('csrf_token', $token);
+  return $token;
+}
+
+// トークンのチェック
+function is_valid_csrf_token($token){
+  if($token === '') {
+    return false;
+  }
+  // get_session()はユーザー定義関数
+  return $token === get_session('csrf_token');
 }
