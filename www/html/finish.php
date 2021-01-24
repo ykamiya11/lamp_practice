@@ -6,8 +6,6 @@ require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
 
 session_start();
-//トークンの照合
-if(is_valid_csrf_token(get_post('csrf_token'))){
 
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
@@ -28,10 +26,4 @@ $carts = entity_assoc_array($carts);
 
 $total_price = sum_carts($carts);
 
-include_once '../view/finish_view.php';
-}
-
-//メッセージを設定
-set_error('不正なアクセスです。');
-//購入完了ページへ遷移
 include_once '../view/finish_view.php';

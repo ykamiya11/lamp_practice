@@ -11,9 +11,6 @@ require_once MODEL_PATH . 'cart.php'; //カート用関数ファイルの読み�
 //セッション開始、再開
 session_start();
 
-//トークン生成
-$token = get_csrf_token();
-
 //ログイン可否判断
 if(is_logined() === false){
   //ログインしていなかった場合、login.php

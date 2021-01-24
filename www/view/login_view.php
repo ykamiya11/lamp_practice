@@ -22,7 +22,7 @@
         <input type="password" name="password" id="password" class="form-control">
       </div>
       <input type="submit" value="ログイン" class="btn btn-primary">
-      <!-- トークンの埋め込み -->
+      <!-- トークン -->
       <input type="hidden" name="csrf_token" value="<?php print $token ?>">
     </form>
   </div>
