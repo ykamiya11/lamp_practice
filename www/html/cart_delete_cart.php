@@ -6,6 +6,8 @@ require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'cart.php';
 
 session_start();
+//トークンの照合
+if(is_valid_csrf_token(get_post('csrf_token'))){
 
 if(is_logined() === false){
   redirect_to(LOGIN_URL);
@@ -22,4 +24,10 @@ if(delete_cart($db, $cart_id)){
   set_error('カートの削除に失敗しました。');
 }
 
+redirect_to(CART_URL);
+}
+
+//メッセージを設定
+set_error('不正なアクセスです。');
+//ユーザーのカートページへ遷移
 redirect_to(CART_URL);

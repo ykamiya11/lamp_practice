@@ -10,6 +10,8 @@ require_once MODEL_PATH . 'item.php'; //商品用関数ファイルの読みこ�
 
 //セッション開始、再開
 session_start();
+//トークンの照合
+if(is_valid_csrf_token(get_post('csrf_token'))){
 
 //ログイン可否判断
 if(is_logined() === false){
@@ -40,5 +42,12 @@ if(destroy_item($db, $item_id) === true){
   set_error('商品削除に失敗しました。');
 }
 
+//管理者ページへ遷移
+redirect_to(ADMIN_URL);
+
+}
+
+//メッセージを設定
+set_error('不正なアクセスです。');
 //管理者ページへ遷移
 redirect_to(ADMIN_URL);

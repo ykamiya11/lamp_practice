@@ -11,6 +11,9 @@ require_once MODEL_PATH . 'item.php'; //商品用関数ファイルの読みこ�
 //新しいセッションを開始、あるいは既存のセッションを開始（7.1.0からsession開始、falseを返すようになった）
 session_start();
 
+//トークン生成
+$token = get_csrf_token();
+
 //ログイン可否判断
 if(is_logined() === false){
   //ログインしていなかった場合、login.php
