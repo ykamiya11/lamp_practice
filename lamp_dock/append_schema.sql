@@ -4,7 +4,7 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
---2021/01/24
+--
 -- テーブルの構造 `purchase_history`
 --
 
@@ -18,10 +18,10 @@ CREATE TABLE `purchase_history` (
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `purchase_details`
+-- テーブルの構造 `purchase_detail`
 --
 
-CREATE TABLE `purchase_details` (
+CREATE TABLE `purchase_detail` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
