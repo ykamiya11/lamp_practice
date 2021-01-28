@@ -22,6 +22,8 @@ define('HOME_URL', '/index.php');
 define('CART_URL', '/cart.php');
 define('FINISH_URL', '/finish.php');
 define('ADMIN_URL', '/admin.php');
+define('HISTORY_URL', '/history.php'); //追記：購入履歴
+define('DETAIL_URL', '/detail.php'); //追記：購入詳細
 
 define('REGEXP_ALPHANUMERIC', '/\A[0-9a-zA-Z]+\z/'); //正規表現英数字
 define('REGEXP_POSITIVE_INTEGER', '/\A([1-9][0-9]*|0)\z/'); //正規表現、正の整数
