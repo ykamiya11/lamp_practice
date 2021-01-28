@@ -213,3 +213,33 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+
+//ランキング情報を取得する
+function get_ranking($db, $is_open = false){
+  $sql = "
+    SELECT
+      items.item_id,
+      items.name,
+      items.image,
+      items.price,
+      SUM(purchase_detail.item_id) as total
+    FROM
+      items
+    JOIN
+      purchase_detail
+    ON
+      items.item_id = purchase_detail.item_id
+    GROUP BY
+      item_id
+    ORDER BY
+      total DESC
+    LIMIT 3
+    ";
+  if($is_open === true){
+    $sql .= '
+      WHERE status = 1
+    ';
+  }
+
+  return fetch_all_query($db, $sql);
+}
