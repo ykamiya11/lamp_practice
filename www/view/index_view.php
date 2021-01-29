@@ -56,7 +56,7 @@
               <img class="card-img h-20" src="<?php print(IMAGE_PATH . $value['image']); ?>">
               <figcaption>
                 <?php print(number_format($value['price'])); ?>円
-                <?php if($item['stock'] > 0){ ?>
+                <?php if($value['stock'] > 0){ ?>
                   <form action="index_add_cart.php" method="post">
                     <input type="submit" value="カートへ追加" class="btn btn-primary btn-block">
                     <input type="hidden" name="item_id" value="<?php print($value['item_id']); ?>">

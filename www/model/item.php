@@ -222,7 +222,8 @@ function get_ranking($db, $is_open = false){
       items.name,
       items.image,
       items.price,
-      SUM(purchase_detail.item_id) as total
+      items.stock,
+      SUM(purchase_detail.amount) as total
     FROM
       items
     JOIN
